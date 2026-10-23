@@ -1,0 +1,390 @@
+```html
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>আমার মিষ্টি ভালোবাসার জন্য... ❤️</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Mina:wght@400;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pastelPink: '#ffd1dc',
+                        softRose: '#ffb6c1',
+                        deepRose: '#e84393',
+                        warmPeach: '#fff0f3'
+                    },
+                    fontFamily: {
+                        siliguri: ['Hind Siliguri', 'sans-serif'],
+                        mina: ['Mina', 'sans-serif'],
+                        handwriting: ['Dancing Script', 'cursive']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background: linear-gradient(135deg, #fff0f3 0%, #ffdde1 50%, #ee9ca7 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #4a4a4a;
+        }
+
+        /* Floating Hearts Animation */
+        .heart-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .heart-particle {
+            position: absolute;
+            bottom: -100px;
+            font-size: 20px;
+            color: rgba(232, 67, 147, 0.4);
+            animation: floatUp 8s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(0.8);
+                opacity: 0;
+            }
+            20% { opacity: 0.8; }
+            100% {
+                transform: translateY(-110vh) rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* Card Flip Effect */
+        .flip-card {
+            perspective: 1000px;
+        }
+        .flip-card-inner {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            backface-visibility: hidden;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fff0f3;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ffb6c1;
+            border-radius: 10px;
+        }
+
+        /* Soft Glow Effect */
+        .soft-shadow {
+            box-shadow: 0 10px 30px rgba(232, 67, 147, 0.15);
+        }
+    </style>
+</head>
+<body class="relative pb-16">
+
+    <!-- Floating Background Hearts -->
+    <div class="heart-bg" id="heart-container"></div>
+
+    <!-- Background Music Toggle -->
+    <audio id="bg-music" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=happy-birthday-115335.mp3" type="audio/mpeg">
+    </audio>
+
+    <button id="music-btn" onclick="toggleMusic()" class="fixed top-5 right-5 z-50 bg-white/80 backdrop-blur-md border border-pink-300 p-3 rounded-full shadow-lg text-deepRose hover:scale-110 transition duration-300 flex items-center justify-center w-12 h-12">
+        <i id="music-icon" class="fa-solid fa-music text-xl"></i>
+    </button>
+
+    <!-- HEADER / HERO SECTION -->
+    <header class="relative z-10 text-center pt-16 pb-8 px-4 max-w-3xl mx-auto">
+        <div class="inline-block bg-white/60 backdrop-blur-sm px-4 py-1.5 rounded-full text-deepRose text-sm font-semibold mb-4 shadow-sm border border-pink-200">
+            <i class="fa-solid fa-heart animate-pulse"></i> শুধু তোমার জন্য...
+        </div>
+        <h1 class="text-4xl sm:text-6xl font-extrabold text-pink-700 font-mina leading-tight mb-4 drop-shadow-sm">
+            প্লিজ আর রাগ করে থেকো না! 🥺
+        </h1>
+        <p class="text-gray-700 text-lg sm:text-xl font-medium max-w-xl mx-auto">
+            তোমার এই মিষ্টি মুখে রাগ একদম মানায় না। তোমার সাথে অভিমান কাটানোর জন্য ছোট্ট একটা প্রয়াস...
+        </p>
+    </header>
+
+    <!-- SECTION 1: APOLOGY LETTER -->
+    <section class="relative z-10 max-w-2xl mx-auto px-4 my-10">
+        <div class="bg-white/80 backdrop-blur-md rounded-3xl p-6 sm:p-10 soft-shadow border border-pink-100 relative">
+            <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-deepRose text-white px-6 py-1 rounded-full text-sm font-bold shadow-md">
+                💌 খোলা চিঠি
+            </div>
+            
+            <div class="text-gray-800 space-y-4 text-base sm:text-lg leading-relaxed pt-2">
+                <p class="font-bold text-pink-600 text-xl">আমার প্রিয় মানুষটি,</p>
+                <p>
+                    আমি জানি আমার ভুলে বা কথায় তুমি কষ্ট পেয়েছ। তোমাকে কষ্ট দেওয়া আমার উদ্দেশ্য ছিল না, কিন্তু তাও অজান্তে ভুলটা করেই ফেলেছি। 
+                </p>
+                <p>
+                    তুমি যখন কথা বলো না, আমার চারপাশের সবকিছু কেমন যেন শূন্য আর বিষণ্ণ হয়ে যায়। তোমার এক চিলতে হাসি আমার সারাদিনের সমস্ত ক্লান্তি মুছে দিতে পারে।
+                </p>
+                <p class="font-semibold text-deepRose">
+                    আমায় কি ক্ষমা করা যায় না বল? আর রাগ করে থেকো না, প্লিজ! ❤️
+                </p>
+                <div class="text-right pt-4 font-handwriting text-2xl text-pink-600 font-bold">
+                    — তোমারই একজন 💖
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: EDITABLE PHOTO GALLERY SECTION -->
+    <section class="relative z-10 max-w-4xl mx-auto px-4 my-16">
+        <div class="text-center mb-10">
+            <span class="text-deepRose font-bold text-sm tracking-wider uppercase">Our Sweet Memories</span>
+            <h2 class="text-3xl sm:text-4xl font-bold font-mina text-pink-700 mt-1">আমাদের কিছু সুন্দর মুহূর্ত ✨</h2>
+            <p class="text-sm text-gray-600 mt-1">ছবি পরিবর্তনের জন্য ছবিতে বা নিচের 'ছবি আপলোড' বাটনে ক্লিক করো!</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="photo-gallery">
+            <!-- Photo Card 1 -->
+            <div class="bg-white p-4 rounded-2xl shadow-md border border-pink-100 hover:shadow-xl transition duration-300 flex flex-col items-center text-center group">
+                <div class="relative w-full h-56 rounded-xl overflow-hidden mb-3 bg-pink-50 cursor-pointer" onclick="triggerFileInput(0)">
+                    <img id="img-0" src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=500&q=80" alt="Memory 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center text-white font-medium text-xs">
+                        <i class="fa-solid fa-camera mr-2"></i> ছবি পরিবর্তন করুন
+                    </div>
+                </div>
+                <input type="file" id="file-0" class="hidden" accept="image/*" onchange="previewImage(event, 0)">
+                <input type="text" value="তোমার প্রথম হাঁসি 💖" class="text-center font-semibold text-gray-700 bg-transparent border-b border-dashed border-pink-300 focus:outline-none focus:border-pink-500 w-full py-1 text-sm">
+            </div>
+
+            <!-- Photo Card 2 -->
+            <div class="bg-white p-4 rounded-2xl shadow-md border border-pink-100 hover:shadow-xl transition duration-300 flex flex-col items-center text-center group">
+                <div class="relative w-full h-56 rounded-xl overflow-hidden mb-3 bg-pink-50 cursor-pointer" onclick="triggerFileInput(1)">
+                    <img id="img-1" src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=500&q=80" alt="Memory 2" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center text-white font-medium text-xs">
+                        <i class="fa-solid fa-camera mr-2"></i> ছবি পরিবর্তন করুন
+                    </div>
+                </div>
+                <input type="file" id="file-1" class="hidden" accept="image/*" onchange="previewImage(event, 1)">
+                <input type="text" value="একসাথে কাটানো মিষ্টি সময় ☕" class="text-center font-semibold text-gray-700 bg-transparent border-b border-dashed border-pink-300 focus:outline-none focus:border-pink-500 w-full py-1 text-sm">
+            </div>
+
+            <!-- Photo Card 3 -->
+            <div class="bg-white p-4 rounded-2xl shadow-md border border-pink-100 hover:shadow-xl transition duration-300 flex flex-col items-center text-center group">
+                <div class="relative w-full h-56 rounded-xl overflow-hidden mb-3 bg-pink-50 cursor-pointer" onclick="triggerFileInput(2)">
+                    <img id="img-2" src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=500&q=80" alt="Memory 3" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center text-white font-medium text-xs">
+                        <i class="fa-solid fa-camera mr-2"></i> ছবি পরিবর্তন করুন
+                    </div>
+                </div>
+                <input type="file" id="file-2" class="hidden" accept="image/*" onchange="previewImage(event, 2)">
+                <input type="text" value="আমার সবচেয়ে প্রিয় মানুষ 🌸" class="text-center font-semibold text-gray-700 bg-transparent border-b border-dashed border-pink-300 focus:outline-none focus:border-pink-500 w-full py-1 text-sm">
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: REASONS TO FORGIVE (CARD FLIP) -->
+    <section class="relative z-10 max-w-4xl mx-auto px-4 my-16">
+        <div class="text-center mb-10">
+            <span class="text-deepRose font-bold text-sm tracking-wider uppercase">Reasons to smile</span>
+            <h2 class="text-3xl sm:text-4xl font-bold font-mina text-pink-700 mt-1">কেন আমায় ক্ষমা করবে? 🤔</h2>
+            <p class="text-sm text-gray-600 mt-1">কার্ডগুলোতে ক্লিক করে দেখো!</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <!-- Card 1 -->
+            <div class="flip-card h-48 cursor-pointer" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner relative w-full h-full text-center rounded-2xl shadow-md">
+                    <div class="flip-card-front absolute inset-0 bg-white rounded-2xl p-6 flex flex-col items-center justify-center border border-pink-200">
+                        <div class="w-12 h-12 bg-pink-100 text-deepRose rounded-full flex items-center justify-center text-2xl mb-3">
+                            <i class="fa-solid fa-face-sad-cry"></i>
+                        </div>
+                        <h3 class="font-bold text-pink-700 text-lg">কারণ নম্বর ১</h3>
+                        <p class="text-xs text-gray-500 mt-1">(ক্লিক করো)</p>
+                    </div>
+                    <div class="flip-card-back absolute inset-0 bg-gradient-to-br from-pink-500 to-rose-600 text-white rounded-2xl p-6 flex items-center justify-center">
+                        <p class="font-medium text-sm sm:text-base">
+                            তুমি না হাসলে আমার পুরো পৃথিবীটাই অন্ধকার লাগে! 🥺
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="flip-card h-48 cursor-pointer" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner relative w-full h-full text-center rounded-2xl shadow-md">
+                    <div class="flip-card-front absolute inset-0 bg-white rounded-2xl p-6 flex flex-col items-center justify-center border border-pink-200">
+                        <div class="w-12 h-12 bg-pink-100 text-deepRose rounded-full flex items-center justify-center text-2xl mb-3">
+                            <i class="fa-solid fa-cookie-bite"></i>
+                        </div>
+                        <h3 class="font-bold text-pink-700 text-lg">কারণ নম্বর ২</h3>
+                        <p class="text-xs text-gray-500 mt-1">(ক্লিক করো)</p>
+                    </div>
+                    <div class="flip-card-back absolute inset-0 bg-gradient-to-br from-pink-500 to-rose-600 text-white rounded-2xl p-6 flex items-center justify-center">
+                        <p class="font-medium text-sm sm:text-base">
+                            রাগ ভাঙলে তোমার পছন্দের সব চকলেট আর আইসক্রিম ট্রিট পাবা! 🍦🍫
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="flip-card h-48 cursor-pointer" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner relative w-full h-full text-center rounded-2xl shadow-md">
+                    <div class="flip-card-front absolute inset-0 bg-white rounded-2xl p-6 flex flex-col items-center justify-center border border-pink-200">
+                        <div class="w-12 h-12 bg-pink-100 text-deepRose rounded-full flex items-center justify-center text-2xl mb-3">
+                            <i class="fa-solid fa-heart-circle-bolt"></i>
+                        </div>
+                        <h3 class="font-bold text-pink-700 text-lg">কারণ নম্বর ৩</h3>
+                        <p class="text-xs text-gray-500 mt-1">(ক্লিক করো)</p>
+                    </div>
+                    <div class="flip-card-back absolute inset-0 bg-gradient-to-br from-pink-500 to-rose-600 text-white rounded-2xl p-6 flex items-center justify-center">
+                        <p class="font-medium text-sm sm:text-base">
+                            কারণ আমি সত্যি সত্যিই কান ধরে বলছি... আর কখনো এমন করবো না! 🙈
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: INTERACTIVE FORGIVE ME QUESTION -->
+    <section class="relative z-10 max-w-xl mx-auto px-4 my-16 text-center">
+        <div class="bg-white/90 backdrop-blur-md rounded-3xl p-8 shadow-xl border border-pink-200 relative">
+            <div class="text-5xl mb-4">🥺👉👈</div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-pink-700 font-mina mb-6">
+                এখন বলো... আমায় কি মাফ করে দিয়েছো?
+            </h2>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 relative min-h-[100px]" id="btn-container">
+                <!-- YES BUTTON -->
+                <button onclick="celebrateForgiveness()" class="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-pink-500 to-deepRose text-white font-bold rounded-full shadow-lg hover:scale-105 transition duration-300 text-lg flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-face-smile-beam"></i> হ্যাঁ, মাফ করে দিলাম ❤️
+                </button>
+
+                <!-- NO BUTTON (RUNAWAY BUTTON) -->
+                <button id="no-btn" onmouseover="moveNoButton()" onclick="moveNoButton()" class="w-full sm:w-auto px-8 py-3.5 bg-gray-200 text-gray-700 font-semibold rounded-full shadow hover:bg-gray-300 transition-all duration-200 text-lg">
+                    না, এখনও রাগ 😤
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SUCCESS OVERLAY MODAL -->
+    <div id="celebration-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-8 max-w-md w-full text-center relative shadow-2xl border-4 border-pink-300 animate-bounce-short">
+            <div class="text-6xl mb-4">🎉🥳💖</div>
+            <h3 class="text-3xl font-extrabold text-pink-600 font-mina mb-2">ইয়াহুউউ! থ্যাঙ্ক ইউ!</h3>
+            <p class="text-gray-700 text-lg leading-relaxed mb-6">
+                আমি জানতাম তুমি আমায় অনেক ভালোবাসো! চলো এবার একগাল হেসে মিষ্টি একটা মেসেজ দিয়ে দাও! 🥰
+            </p>
+            <button onclick="closeModal()" class="px-8 py-3 bg-pink-500 hover:bg-pink-600 text-white font-bold rounded-full shadow-md text-base transition">
+                অনেক ভালোবাসা! ❤️
+            </button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // 1. Floating Hearts Background
+        function createHearts() {
+            const container = document.getElementById('heart-container');
+            const heartIcons = ['💖', '💕', '💗', '🌸', '✨'];
+            for (let i = 0; i < 25; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart-particle';
+                heart.innerText = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heart.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                container.appendChild(heart);
+            }
+        }
+        createHearts();
+
+        // 2. Background Music Toggle
+        const bgMusic = document.getElementById('bg-music');
+        const musicIcon = document.getElementById('music-icon');
+        let isPlaying = false;
+
+        function toggleMusic() {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicIcon.className = "fa-solid fa-music text-xl";
+            } else {
+                bgMusic.play();
+                musicIcon.className = "fa-solid fa-pause text-xl";
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // 3. Photo Upload / Preview Logic
+        function triggerFileInput(index) {
+            document.getElementById(`file-${index}`).click();
+        }
+
+        function previewImage(event, index) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById(`img-${index}`).src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // 4. Playful "No" Button Movement & Shrinking
+        let noClickCount = 0;
+        function moveNoButton() {
+            const noBtn = document.getElementById('no-btn');
+            noClickCount++;
+
+            // Move randomly within container or screen
+            const x = Math.random() * 200 - 100;
+            const y = Math.random() * 100 - 50;
+            
+            // Decrease scale slightly each time
+            const scale = Math.max(0.4, 1 - noClickCount * 0.15);
+
+            noBtn.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+
+            if (noClickCount >= 5) {
+                noBtn.innerText = "ঠিক আছে মাফ করে দিলাম! 🙈";
+                noBtn.onclick = celebrateForgiveness;
+            }
+        }
+
+        // 5. Celebration / Forgiveness Action
+        function celebrateForgiveness() {
+            // Trigger Confetti
+            confetti({
+                particleCount: 120,
+         
